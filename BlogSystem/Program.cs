@@ -1,11 +1,12 @@
+using BlogSystem.Model;
 using BlogSystem.Repository;
 using BlogSystem.Repository.Interface;
-
+using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 string connString = builder.Configuration.GetConnectionString("DefaultDatabase");
 // Add services to the container.
 
-builder.Services.AddDbContext<StudentContext>(options => options.UseSqlServer(connString));
+builder.Services.AddDbContext<BlogContext>(options => options.UseSqlServer(connString));
 builder.Services.AddScoped(typeof(IGenericReposiotry<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
