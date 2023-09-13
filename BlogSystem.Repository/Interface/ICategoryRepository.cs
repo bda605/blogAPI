@@ -9,6 +9,5 @@ namespace BlogSystem.Repository.Interface
 {
     public interface ICategoryRepository : IGenericReposiotry<Category>
     {
-
     }
 }
