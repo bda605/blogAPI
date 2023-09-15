@@ -16,8 +16,39 @@ namespace BlogSystem.Controllers
         {
             _categoryService = categoryService;
         }
-
+        /// <summary>
+        ///  取類別清單
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
         public ResponseVM<List<ResponseCategoryVM>> GetCategorys()
             => _categoryService.GetCategorys();
+       
+        /// <summary>
+        /// 新增類別
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ResponseVM<string> AddCategory(string name)
+            => _categoryService.AddCategory(name);
+        /// <summary>
+        /// 修改類別
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ResponseVM<string> UpdateCategory(int id,string name)
+            => _categoryService.UpdateCategory(id,name);
+        /// <summary>
+        /// 刪除類別
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ResponseVM<string> DeleteCategory(int id)
+            => _categoryService.DeleteCategory(id);
+
     }
 }

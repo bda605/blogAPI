@@ -10,5 +10,11 @@ namespace BlogSystem.Service.Interface
     public interface ICategoryService
     {
         ResponseVM<List<ResponseCategoryVM>> GetCategorys();
+
+        ResponseVM<string> AddCategory(string name);
+
+        ResponseVM<string> UpdateCategory(int id,string name);
+
+        ResponseVM<string> DeleteCategory(int id);
     }
 }
