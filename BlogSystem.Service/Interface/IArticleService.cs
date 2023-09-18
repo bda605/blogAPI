@@ -15,7 +15,7 @@ namespace BlogSystem.Service.Interface
 
         ResponseVM<string> AddArticle(RequestArticleVM requestArticle);
 
-        //ResponseVM<string> UpdateArticle();
+        ResponseVM<string> UpdateArticle(RequestArticleVM requestArticle);
 
         ResponseVM<string> DeleteArticle(int id);
     }

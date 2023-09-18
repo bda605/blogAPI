@@ -30,10 +30,10 @@ namespace BlogSystem.Service
         public ResponseVM<string> DeleteArticle(int id)
         {
             var article = _articleRepository.Get(x => x.Id == id).FirstOrDefault();
+            
             if (article == null)
-            {
                 return new ResponseVM<string>().Fail(ResponseCode.NotFound);
-            }
+            
             _articleRepository.Delete(article);
             var result = _articleRepository.SaveChanges();
             if (result > 0)

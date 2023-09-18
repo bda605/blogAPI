@@ -10,4 +10,8 @@
     <ProjectReference Include="..\BlogSystem.Repository\BlogSystem.Repository.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ConvertToClass\" />
+  </ItemGroup>
+
 </Project>
