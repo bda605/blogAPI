@@ -15,6 +15,6 @@ namespace BlogSystem.Model
         }
 
         public DbSet<Category> Category { get; set; }
-        public DbSet<CategoryDetail> CategoryDetail { get; set; }
+        public DbSet<Article> Article { get; set; }
     }
 }

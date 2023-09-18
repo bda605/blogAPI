@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BlogSystem.Model;
+using BlogSystem.Model.RequestViewModel;
 
 namespace BlogSystem.Service.Interface
 {
@@ -11,10 +13,10 @@ namespace BlogSystem.Service.Interface
     {
         //ResponseVM<List<ResponseCategoryVM>> GetArticles();
 
-        //ResponseVM<string> AddArticle();
+        ResponseVM<string> AddArticle(RequestArticleVM requestArticle);
 
         //ResponseVM<string> UpdateArticle();
 
-        //ResponseVM<string> DeleteArticle();
+        ResponseVM<string> DeleteArticle(int id);
     }
 }

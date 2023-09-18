@@ -64,9 +64,8 @@ namespace BlogSystem.Service
         {
             var category = _categoryRepository.Get(x => x.Id == id).FirstOrDefault();
             if (category == null)
-            {
                 return new ResponseVM<string>().Fail(ResponseCode.NotFound);
-            }
+
             _categoryRepository.Delete(category);
             var result = _categoryRepository.SaveChanges();
             if (result > 0)

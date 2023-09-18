@@ -15,9 +15,9 @@ namespace BlogSystem.Model.Migrations
                 name: "Category",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Id = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SubId = table.Column<int>(type: "int", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
@@ -27,21 +27,23 @@ namespace BlogSystem.Model.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CategoryDetail",
+                name: "Article",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UpdatedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    CategoryId = table.Column<int>(type: "int", nullable: false)
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    CategorySubId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CategoryDetail", x => x.Id);
+                    table.PrimaryKey("PK_Article", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_CategoryDetail_Category_CategoryId",
+                        name: "FK_Article_Category_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Category",
                         principalColumn: "Id",
@@ -49,8 +51,8 @@ namespace BlogSystem.Model.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CategoryDetail_CategoryId",
-                table: "CategoryDetail",
+                name: "IX_Article_CategoryId",
+                table: "Article",
                 column: "CategoryId");
         }
 
@@ -58,7 +60,7 @@ namespace BlogSystem.Model.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CategoryDetail");
+                name: "Article");
 
             migrationBuilder.DropTable(
                 name: "Category");

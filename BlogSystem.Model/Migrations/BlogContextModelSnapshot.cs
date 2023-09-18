@@ -22,30 +22,7 @@ namespace BlogSystem.Model.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("BlogSystem.Model.Entitie.Category", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Category");
-                });
-
-            modelBuilder.Entity("BlogSystem.Model.Entitie.CategoryDetail", b =>
+            modelBuilder.Entity("BlogSystem.Model.Entitie.Article", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -56,10 +33,17 @@ namespace BlogSystem.Model.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
+                    b.Property<int>("CategorySubId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Content")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -70,23 +54,44 @@ namespace BlogSystem.Model.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("CategoryDetail");
-                });
-
-            modelBuilder.Entity("BlogSystem.Model.Entitie.CategoryDetail", b =>
-                {
-                    b.HasOne("BlogSystem.Model.Entitie.Category", "Category")
-                        .WithMany("CategoryDetail")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
+                    b.ToTable("Article");
                 });
 
             modelBuilder.Entity("BlogSystem.Model.Entitie.Category", b =>
                 {
-                    b.Navigation("CategoryDetail");
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SubId")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Category");
+                });
+
+            modelBuilder.Entity("BlogSystem.Model.Entitie.Article", b =>
+                {
+                    b.HasOne("BlogSystem.Model.Entitie.Category", null)
+                        .WithMany("Articles")
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("BlogSystem.Model.Entitie.Category", b =>
+                {
+                    b.Navigation("Articles");
                 });
 #pragma warning restore 612, 618
         }
