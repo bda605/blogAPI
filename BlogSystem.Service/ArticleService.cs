@@ -27,6 +27,12 @@ namespace BlogSystem.Service
             return response.Success();
         }
 
+        public ResponseVM<string> UpdateArticle(RequestArticleVM requestArticle)
+        {
+            var response = new ResponseVM<string>();
+            return response.Success();
+        }
+
         public ResponseVM<string> DeleteArticle(int id)
         {
             var article = _articleRepository.Get(x => x.Id == id).FirstOrDefault();
