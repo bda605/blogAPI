@@ -5,10 +5,13 @@ using BlogSystem.Service;
 using BlogSystem.Service.Interface;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using BlogSystem.Service.ConvertToClass;
 
 var builder = WebApplication.CreateBuilder(args);
 string connString = builder.Configuration.GetConnectionString("DefaultDatabase");
 // Add services to the container.
+//builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddAutoMapper(typeof(MappingProfiles));
 
 builder.Services.AddDbContext<BlogContext>(options => options.UseSqlServer(connString));
 builder.Services.AddScoped(typeof(IGenericReposiotry<>), typeof(GenericRepository<>));
