@@ -10,6 +10,8 @@ namespace BlogSystem.Model.ResponseViewModel
     {
         public int Id { get; set; }
 
+        public int SubId { get; set; }
+
         public string Name { get; set; }
     }
 }

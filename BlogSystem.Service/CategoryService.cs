@@ -26,6 +26,7 @@ namespace BlogSystem.Service
             var categorys = result.Select(x => new ResponseCategoryVM()
             {
                 Id = x.Id,
+                SubId = x.SubId,
                 Name = x.Name
             }).ToList();
 
