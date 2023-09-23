@@ -23,8 +23,8 @@ namespace BlogSystem.Model.Entitie
 
         public DateTime UpdatedDate { get; set; }
 
-        public int CategoryId { get; set; }
-        public int CategorySubId { get; set; }
+        public string CategoryId { get; set; }
+        public string CategorySubId { get; set; }
 
     }
 }

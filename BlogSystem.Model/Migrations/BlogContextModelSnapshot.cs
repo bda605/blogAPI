@@ -30,11 +30,13 @@ namespace BlogSystem.Model.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
+                    b.Property<string>("CategoryId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("CategorySubId")
-                        .HasColumnType("int");
+                    b.Property<string>("CategorySubId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Content")
                         .IsRequired()
@@ -52,14 +54,15 @@ namespace BlogSystem.Model.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
-
                     b.ToTable("Article");
                 });
 
             modelBuilder.Entity("BlogSystem.Model.Entitie.Category", b =>
                 {
                     b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("SubId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("CreatedDate")
@@ -69,29 +72,12 @@ namespace BlogSystem.Model.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SubId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("UpdatedDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("Id");
+                    b.HasKey("Id", "SubId");
 
                     b.ToTable("Category");
-                });
-
-            modelBuilder.Entity("BlogSystem.Model.Entitie.Article", b =>
-                {
-                    b.HasOne("BlogSystem.Model.Entitie.Category", null)
-                        .WithMany("Articles")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("BlogSystem.Model.Entitie.Category", b =>
-                {
-                    b.Navigation("Articles");
                 });
 #pragma warning restore 612, 618
         }

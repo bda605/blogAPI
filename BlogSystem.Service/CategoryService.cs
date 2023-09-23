@@ -1,4 +1,5 @@
-﻿using BlogSystem.Common;
+﻿using System.Dynamic;
+using BlogSystem.Common;
 using BlogSystem.Model.Entitie;
 using BlogSystem.Model.ResponseViewModel;
 using BlogSystem.Repository.Interface;
@@ -31,13 +32,38 @@ namespace BlogSystem.Service
             return response.Success(categorys);
         }
 
-        public ResponseVM<string> AddCategory(string name)
+        public ResponseVM<string> AddCategory(int id,int subId,string name)
         {
-             var category = new Category()
-             {
-                 Name = name
-             };
-             _categoryRepository.Insert(category);
+            var category = new Category();
+            if (id > 0 && subId == 0)
+            {
+                var qryCategory = _categoryRepository.Get(x => x.Id == id)
+                    .OrderByDescending(x => Convert.ToInt32(x.SubId)).FirstOrDefault();
+                if (qryCategory != null)
+                {
+                    category.Id = qryCategory.Id;
+                    category.SubId = qryCategory.SubId + 1;
+            
+                }
+            }
+
+            if (id == 0 && subId == 0)
+            {
+                var qryCategory = _categoryRepository.Get(x => x.SubId == 0)
+                    .OrderByDescending(x=>Convert .ToInt32(x.Id)).FirstOrDefault();
+                category.Id = 1;
+                category.SubId = subId;
+                category.Name = name;
+                if (qryCategory != null)
+                {
+                    category.Id = qryCategory.Id +1;
+                    category.SubId = subId;
+                }
+            }
+            category.Name = name;
+            category.CreatedDate= DateTime.Now;
+            category.UpdatedDate = DateTime.Now;
+            _categoryRepository.Insert(category);
              var result = _categoryRepository.SaveChanges();
              if (result > 0)
                  return new ResponseVM<string>().Success("新增成功");
@@ -45,7 +71,7 @@ namespace BlogSystem.Service
              return new ResponseVM<string>().Fail(ResponseCode.WriteError);
         }
 
-        public ResponseVM<string> UpdateCategory(int id, string name)
+        public ResponseVM<string> UpdateCategory(int id, int subId, string name)
         {
             var category = _categoryRepository.Get(x => x.Id == id).FirstOrDefault();
             if(category == null)
@@ -60,7 +86,7 @@ namespace BlogSystem.Service
             return new ResponseVM<string>().Fail(ResponseCode.WriteError);
         }
 
-        public ResponseVM<string> DeleteCategory(int id)
+        public ResponseVM<string> DeleteCategory(int id,int subId)
         {
             var category = _categoryRepository.Get(x => x.Id == id).FirstOrDefault();
             if (category == null)

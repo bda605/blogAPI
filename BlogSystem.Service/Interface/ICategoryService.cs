@@ -11,10 +11,10 @@ namespace BlogSystem.Service.Interface
     {
         ResponseVM<List<ResponseCategoryVM>> GetCategorys();
 
-        ResponseVM<string> AddCategory(string name);
+        ResponseVM<string> AddCategory(int id, int subId, string name);
 
-        ResponseVM<string> UpdateCategory(int id,string name);
+        ResponseVM<string> UpdateCategory(int id, int subId, string name);
 
-        ResponseVM<string> DeleteCategory(int id);
+        ResponseVM<string> DeleteCategory(int id, int subId);
     }
 }

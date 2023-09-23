@@ -30,8 +30,8 @@ namespace BlogSystem.Controllers
         /// <param name="name"></param>
         /// <returns></returns>
         [HttpPost]
-        public ResponseVM<string> AddCategory(string name)
-            => _categoryService.AddCategory(name);
+        public ResponseVM<string> AddCategory(int id,int subId,string name)
+            => _categoryService.AddCategory( id,subId,name);
         /// <summary>
         /// 修改類別
         /// </summary>
@@ -39,16 +39,16 @@ namespace BlogSystem.Controllers
         /// <param name="name"></param>
         /// <returns></returns>
         [HttpPost]
-        public ResponseVM<string> UpdateCategory(int id,string name)
-            => _categoryService.UpdateCategory(id,name);
+        public ResponseVM<string> UpdateCategory(int id,int subId,string name)
+            => _categoryService.UpdateCategory(id,subId,name);
         /// <summary>
         /// 刪除類別
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
         [HttpPost]
-        public ResponseVM<string> DeleteCategory(int id)
-            => _categoryService.DeleteCategory(id);
+        public ResponseVM<string> DeleteCategory(int id,int subId)
+            => _categoryService.DeleteCategory(id,subId);
 
     }
 }

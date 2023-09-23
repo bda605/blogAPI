@@ -13,7 +13,19 @@ namespace BlogSystem.Model
         public BlogContext(DbContextOptions<BlogContext> options) : base(options)
         {
         }
-
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            //builder.Entity<Category>().HasKey(table => new
+            //{
+            //    table.Id,
+            //    table.SubId
+            //});
+            builder.Entity<Category>().HasKey(table => new
+            {
+                table.Id,
+                table.SubId
+            });
+        }
         public DbSet<Category> Category { get; set; }
         public DbSet<Article> Article { get; set; }
     }

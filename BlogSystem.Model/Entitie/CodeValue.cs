@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,18 +8,18 @@ using System.Threading.Tasks;
 
 namespace BlogSystem.Model.Entitie
 {
-    [Table("Category")]  
-    public class Category
+    [Table("CodeValue")]
+    public class CodeValue
     {
+        public string TypeCode { get; set; }
+        public string Code { get; set; }
+        public string SubCode { get; set; }
+        
+        public string Value { get; set; }
 
-        public int Id { get; set; }
-        public int SubId { get; set; }
-        public string Name { get; set; }
 
         public DateTime CreatedDate { get; set; }
 
-        public DateTime UpdatedDate { get; set;}
-
-
+        public DateTime UpdateDate { get; set; }
     }
 }
