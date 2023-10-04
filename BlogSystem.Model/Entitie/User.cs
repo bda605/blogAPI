@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace BlogSystem.Model.Entitie
 {
-    public class Member
+    public class User
     {
-
+        
     }
 }
