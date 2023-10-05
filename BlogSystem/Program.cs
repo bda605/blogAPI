@@ -17,6 +17,9 @@ builder.Services.AddDbContext<BlogContext>(options => options.UseSqlServer(connS
 builder.Services.AddScoped(typeof(IGenericReposiotry<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IArticleRepository, ArticleRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IArticleService, ArticleService>();
 // Add services to the container.

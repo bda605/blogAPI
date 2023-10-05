@@ -28,5 +28,7 @@ namespace BlogSystem.Model
         }
         public DbSet<Category> Category { get; set; }
         public DbSet<Article> Article { get; set; }
+
+        public DbSet<User> User { get; set; }
     }
 }
