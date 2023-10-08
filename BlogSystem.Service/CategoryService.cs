@@ -1,36 +1,56 @@
-﻿using System.Dynamic;
+﻿using System;
+using System.Dynamic;
 using BlogSystem.Common;
 using BlogSystem.Model.Entitie;
 using BlogSystem.Model.ResponseViewModel;
 using BlogSystem.Repository.Interface;
 using BlogSystem.Service.Interface;
+using Microsoft.Extensions.Caching.Memory;
 
 namespace BlogSystem.Service
 {
     public class CategoryService:ICategoryService
     {
         private readonly ICategoryRepository _categoryRepository;
+        private readonly IMemoryCache _memoryCache;
 
-        public CategoryService(ICategoryRepository categoryRepository)
+        public CategoryService(ICategoryRepository categoryRepository, IMemoryCache memoryCache)
         {
             _categoryRepository = categoryRepository;
+            _memoryCache = memoryCache;
         }
 
         public ResponseVM<List<ResponseCategoryVM>> GetCategorys()
         {
             var response = new ResponseVM<List<ResponseCategoryVM>>();
-            var result = _categoryRepository.GetAll();
-            if (!result.Any())
-               return response.Fail(ResponseCode.NotFound);
-          
-            var categorys = result.Select(x => new ResponseCategoryVM()
+            var cacheCategorys = _memoryCache.Get<List<ResponseCategoryVM>>("categorys");
+            if (cacheCategorys == null)
             {
-                Id = x.Id,
-                SubId = x.SubId,
-                Name = x.Name
-            }).ToList();
+                var result = _categoryRepository.GetAll();
+                if (!result.Any())
+                    return response.Fail(ResponseCode.NotFound);
+            
+                cacheCategorys = result.Select(x => new ResponseCategoryVM()
+                {
+                    Id = x.Id,
+                    SubId = x.SubId,
+                    Name = x.Name
+                }).ToList();
+                _memoryCache.Set("categorys", cacheCategorys, TimeSpan.FromMinutes(2));
+            }
+            //
+            //var result = _categoryRepository.GetAll();
+            //if (!result.Any())
+            //   return response.Fail(ResponseCode.NotFound);
 
-            return response.Success(categorys);
+            //var categorys = result.Select(x => new ResponseCategoryVM()
+            //{
+            //    Id = x.Id,
+            //    SubId = x.SubId,
+            //    Name = x.Name
+            //}).ToList();
+
+            return response.Success(cacheCategorys);
         }
 
         public ResponseVM<string> AddCategory(int id,int subId,string name)

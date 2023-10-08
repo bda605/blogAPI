@@ -24,6 +24,9 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IArticleService, ArticleService>();
 // Add services to the container.
 
+// Add Cache
+builder.Services.AddMemoryCache();
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
