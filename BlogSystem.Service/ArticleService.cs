@@ -25,7 +25,37 @@ namespace BlogSystem.Service
             _articleRepository = articleRepository;
             _mapper = mapper;
         }
-        
+
+        public ResponseVM<List<ResponseArticleVM>> GetArticles()
+        {
+            var responseArticles = _articleRepository.GetAll().Select(x => new ResponseArticleVM()
+            {
+                Id = x.Id,
+                Title = x.Title,
+                Content = x.Content
+            }).ToList();
+            
+            if(responseArticles.Any())
+                return new ResponseVM<List<ResponseArticleVM>>().Fail(ResponseCode.NotFound);
+
+            return new ResponseVM<List<ResponseArticleVM>>().Success(responseArticles);
+        }
+
+        public ResponseVM<ResponseArticleVM> GetArticle(int id)
+        {
+            var responseArticle = _articleRepository.Get(x => x.Id == id).Select(x => new ResponseArticleVM()
+            {
+                Id = x.Id,
+                Title = x.Title,
+                Content = x.Content
+            }).FirstOrDefault();
+
+            if (responseArticle == null)
+                return new ResponseVM<ResponseArticleVM>().Fail(ResponseCode.NotFound);
+             
+            return new ResponseVM<ResponseArticleVM>().Success();
+        }
+
         public ResponseVM<string> AddArticle(RequestArticleVM requestArticle)
         {
             var article = _mapper.Map<Article>(requestArticle);

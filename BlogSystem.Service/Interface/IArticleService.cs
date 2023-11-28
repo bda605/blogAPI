@@ -11,8 +11,9 @@ namespace BlogSystem.Service.Interface
 {
     public interface IArticleService
     {
-        //ResponseVM<List<ResponseCategoryVM>> GetArticles();
+        ResponseVM<List<ResponseArticleVM>> GetArticles();
 
+        ResponseVM<ResponseArticleVM> GetArticle(int id);
         ResponseVM<string> AddArticle(RequestArticleVM requestArticle);
 
         ResponseVM<string> UpdateArticle(RequestArticleVM requestArticle);
