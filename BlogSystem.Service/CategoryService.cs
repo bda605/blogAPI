@@ -20,17 +20,17 @@ namespace BlogSystem.Service
             _memoryCache = memoryCache;
         }
 
-        public ResponseVM<List<ResponseCategoryVM>> GetCategorys()
+        public ResponseVM<List<CategoryResponseVM>> GetCategorys()
         {
-            var response = new ResponseVM<List<ResponseCategoryVM>>();
-            var cacheCategorys = _memoryCache.Get<List<ResponseCategoryVM>>("categorys");
+            var response = new ResponseVM<List<CategoryResponseVM>>();
+            var cacheCategorys = _memoryCache.Get<List<CategoryResponseVM>>("categorys");
             if (cacheCategorys == null)
             {
                 var result = _categoryRepository.GetAll();
                 if (!result.Any())
                     return response.Fail(ResponseCode.NotFound);
             
-                cacheCategorys = result.Select(x => new ResponseCategoryVM()
+                cacheCategorys = result.Select(x => new CategoryResponseVM()
                 {
                     Id = x.Id,
                     SubId = x.SubId,
@@ -43,7 +43,7 @@ namespace BlogSystem.Service
             //if (!result.Any())
             //   return response.Fail(ResponseCode.NotFound);
 
-            //var categorys = result.Select(x => new ResponseCategoryVM()
+            //var categorys = result.Select(x => new CategoryResponseVM()
             //{
             //    Id = x.Id,
             //    SubId = x.SubId,

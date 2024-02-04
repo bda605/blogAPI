@@ -9,7 +9,7 @@ namespace BlogSystem.Service.Interface
 {
     public interface ICategoryService
     {
-        ResponseVM<List<ResponseCategoryVM>> GetCategorys();
+        ResponseVM<List<CategoryResponseVM>> GetCategorys();
 
         ResponseVM<string> AddCategory(int id, int subId, string name);
 

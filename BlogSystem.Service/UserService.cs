@@ -8,7 +8,6 @@ using AutoMapper.Execution;
 using Azure;
 using BlogSystem.Common;
 using BlogSystem.Model.Entitie;
-using BlogSystem.Model.Migrations;
 using BlogSystem.Model.ResponseViewModel;
 using BlogSystem.Repository.Interface;
 using BlogSystem.Service.Interface;

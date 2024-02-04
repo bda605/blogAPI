@@ -17,19 +17,19 @@ namespace BlogSystem.Controllers
         /// <summary>
         /// 新增文章
         /// </summary>
-        /// <param name="requestArticle"></param>
+        /// <param name="articleRequestVmArticle"></param>
         /// <returns></returns>
         [HttpPost]
-        public ResponseVM<string> AddArticle(RequestArticleVM requestArticle)
-            => _articleService.AddArticle(requestArticle);
+        public ResponseVM<string> AddArticle(ArticleRequestVM articleRequestVmArticle)
+            => _articleService.AddArticle(articleRequestVmArticle);
         /// <summary>
         /// 修改文章
         /// </summary>
-        /// <param name="requestArticle"></param>
+        /// <param name="articleRequestVmArticle"></param>
         /// <returns></returns>
         [HttpPost]
-        public ResponseVM<string> UpdateArticle(RequestArticleVM requestArticle)
-            => _articleService.UpdateArticle(requestArticle);
+        public ResponseVM<string> UpdateArticle(ArticleRequestVM articleRequestVmArticle)
+            => _articleService.UpdateArticle(articleRequestVmArticle);
 
         /// <summary>
         /// 刪除文章

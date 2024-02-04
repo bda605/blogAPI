@@ -11,12 +11,12 @@ namespace BlogSystem.Service.Interface
 {
     public interface IArticleService
     {
-        ResponseVM<List<ResponseArticleVM>> GetArticles();
+        ResponseVM<List<ArticleResponseVM>> GetArticles();
 
-        ResponseVM<ResponseArticleVM> GetArticle(int id);
-        ResponseVM<string> AddArticle(RequestArticleVM requestArticle);
+        ResponseVM<ArticleResponseVM> GetArticle(int id);
+        ResponseVM<string> AddArticle(ArticleRequestVM articleRequest);
 
-        ResponseVM<string> UpdateArticle(RequestArticleVM requestArticle);
+        ResponseVM<string> UpdateArticle(ArticleRequestVM articleRequest);
 
         ResponseVM<string> DeleteArticle(int id);
     }

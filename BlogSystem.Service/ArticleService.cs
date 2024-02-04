@@ -26,9 +26,9 @@ namespace BlogSystem.Service
             _mapper = mapper;
         }
 
-        public ResponseVM<List<ResponseArticleVM>> GetArticles()
+        public ResponseVM<List<ArticleResponseVM>> GetArticles()
         {
-            var responseArticles = _articleRepository.GetAll().Select(x => new ResponseArticleVM()
+            var responseArticles = _articleRepository.GetAll().Select(x => new ArticleResponseVM()
             {
                 Id = x.Id,
                 Title = x.Title,
@@ -36,14 +36,14 @@ namespace BlogSystem.Service
             }).ToList();
             
             if(responseArticles.Any())
-                return new ResponseVM<List<ResponseArticleVM>>().Fail(ResponseCode.NotFound);
+                return new ResponseVM<List<ArticleResponseVM>>().Fail(ResponseCode.NotFound);
 
-            return new ResponseVM<List<ResponseArticleVM>>().Success(responseArticles);
+            return new ResponseVM<List<ArticleResponseVM>>().Success(responseArticles);
         }
 
-        public ResponseVM<ResponseArticleVM> GetArticle(int id)
+        public ResponseVM<ArticleResponseVM> GetArticle(int id)
         {
-            var responseArticle = _articleRepository.Get(x => x.Id == id).Select(x => new ResponseArticleVM()
+            var responseArticle = _articleRepository.Get(x => x.Id == id).Select(x => new ArticleResponseVM()
             {
                 Id = x.Id,
                 Title = x.Title,
@@ -51,14 +51,14 @@ namespace BlogSystem.Service
             }).FirstOrDefault();
 
             if (responseArticle == null)
-                return new ResponseVM<ResponseArticleVM>().Fail(ResponseCode.NotFound);
+                return new ResponseVM<ArticleResponseVM>().Fail(ResponseCode.NotFound);
              
-            return new ResponseVM<ResponseArticleVM>().Success();
+            return new ResponseVM<ArticleResponseVM>().Success();
         }
 
-        public ResponseVM<string> AddArticle(RequestArticleVM requestArticle)
+        public ResponseVM<string> AddArticle(ArticleRequestVM articleRequest)
         {
-            var article = _mapper.Map<Article>(requestArticle);
+            var article = _mapper.Map<Article>(articleRequest);
             article.CreatedDate = DateTime.Now;
             article.UpdatedDate = DateTime.Now;
             _articleRepository.Insert(article);
@@ -70,13 +70,13 @@ namespace BlogSystem.Service
             return new ResponseVM<string>().Fail(ResponseCode.WriteError);
         }
 
-        public ResponseVM<string> UpdateArticle(RequestArticleVM requestArticle)
+        public ResponseVM<string> UpdateArticle(ArticleRequestVM articleRequest)
         {
             var response = new ResponseVM<string>();
-            var data = _articleRepository.Get(x => x.Id == requestArticle.Id).FirstOrDefault();
+            var data = _articleRepository.Get(x => x.Id == articleRequest.Id).FirstOrDefault();
             if(data == null)
                 return new ResponseVM<string>().Fail(ResponseCode.NotFound);
-            var article = _mapper.Map<Article>(requestArticle);
+            var article = _mapper.Map<Article>(articleRequest);
             _articleRepository.Update(article);
             var result = _articleRepository.SaveChanges();
             if (result > 0)

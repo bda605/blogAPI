@@ -8,7 +8,7 @@ namespace BlogSystem.Service.ConvertToClass
     {
         public MappingProfiles()
         {
-            CreateMap<RequestArticleVM,Article>();
+            CreateMap<ArticleRequestVM,Article>();
         }
     }
 }

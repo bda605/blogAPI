@@ -21,7 +21,7 @@ namespace BlogSystem.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        public ResponseVM<List<ResponseCategoryVM>> GetCategorys()
+        public ResponseVM<List<CategoryResponseVM>> GetCategorys()
             => _categoryService.GetCategorys();
        
         /// <summary>

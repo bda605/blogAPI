@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BlogSystem.Model.ResponseViewModel
 {
-    public class ResponseCategoryVM
+    public class CategoryResponseVM
     {
         public int Id { get; set; }
 
