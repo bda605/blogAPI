@@ -33,7 +33,7 @@ namespace BlogSystem.Service
                     _userRepository.Insert(new User()
                     {
                         UserName = "ADMIN",
-                        Email = "bda605@gmail.com",
+                        Email = "admin@gmail.com",
                         Password = PasswordEncryption(password),
                         Role = "ADMIN",
                     });
